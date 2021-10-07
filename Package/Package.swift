@@ -5,6 +5,10 @@ import PackageDescription
 
 let package = Package(
     name: "EveryPinch",
+    platforms: [.macOS(.v11)],
+    products: [
+        .library(name: "PinchCore", targets: ["PinchCore"])
+    ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
@@ -14,7 +18,7 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .systemLibrary(name: "MultitouchSupport"),
         .target(
-            name: "EveryPinch",
+            name: "PinchCore",
             dependencies: ["MultitouchSupport"],
             linkerSettings: [
                 .linkedFramework("MultitouchSupport"),

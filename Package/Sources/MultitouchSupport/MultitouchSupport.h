@@ -1,5 +1,5 @@
 // Reference:
-//   - https://github.com/asmagill/hs._asm.undocumented.touchdevice/blob/856f98dd700e5c0263fbf74ed9ac9b6d13fac84c/MultitouchSupport.h
+//   - https://github.com/asmagill/hs._asm.undocumented.touchdevice/blob/master/MultitouchSupport.h
 //   - https://github.com/Kyome22/OpenMultitouchSupport/blob/master/OpenMultitouchSupport/OpenMTInternal.h
 
 #include <Cocoa/Cocoa.h>
