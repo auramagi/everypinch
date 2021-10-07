@@ -55,26 +55,19 @@ typedef void (*MTFrameCallbackFunction)(MTDeviceRef device, MTTouch touches[], i
 
 CFMutableArrayRef MTDeviceCreateList();
 
-bool MTDeviceIsAlive(MTDeviceRef d)
-    CF_SWIFT_NAME(getter:MTDevice.isAlive(self:));
-bool MTDeviceIsMTHIDDevice(MTDeviceRef d)
-    CF_SWIFT_NAME(getter:MTDevice.isMTHIDDevice(self:));
-bool MTDeviceIsRunning(MTDeviceRef d)
-    CF_SWIFT_NAME(getter:MTDevice.isRunning(self:));
+bool MTDeviceIsAlive(MTDeviceRef) CF_SWIFT_NAME(getter:MTDevice.isAlive(self:));
+bool MTDeviceIsMTHIDDevice(MTDeviceRef) CF_SWIFT_NAME(getter:MTDevice.isMTHIDDevice(self:));
+bool MTDeviceIsRunning(MTDeviceRef) CF_SWIFT_NAME(getter:MTDevice.isRunning(self:));
 
-void MTRegisterContactFrameCallback(MTDeviceRef d, MTFrameCallbackFunction callback)
-    CF_SWIFT_NAME(MTDevice.registerContactFrameCallback(self:callback:));
-void MTUnregisterContactFrameCallback(MTDeviceRef d, MTFrameCallbackFunction callback)
-    CF_SWIFT_NAME(MTDevice.unregisterContactFrameCallback(self:callback:));
+void MTDeviceGetDeviceTimestampOffset(MTDeviceRef, double*) CF_SWIFT_NAME(MTDevice.timestampOffset(self:_:));
 
-void MTDeviceStart(MTDeviceRef, int)
-    CF_SWIFT_NAME(MTDevice.start(self:_:));
+bool MTRegisterContactFrameCallback(MTDeviceRef, MTFrameCallbackFunction) CF_SWIFT_NAME(MTDevice.register(self:contactFrameCallback:));
+bool MTUnregisterContactFrameCallback(MTDeviceRef, MTFrameCallbackFunction callback) CF_SWIFT_NAME(MTDevice.unregister(self:contactFrameCallback:));
 
-void MTDeviceStop(MTDeviceRef)
-    CF_SWIFT_NAME(MTDevice.stop(self:));
+void MTDeviceStart(MTDeviceRef, int runMode) CF_SWIFT_NAME(MTDevice.start(self:runMode:));
+void MTDeviceStop(MTDeviceRef) CF_SWIFT_NAME(MTDevice.stop(self:));
 
-void MTDeviceRelease(MTDeviceRef)
-    CF_SWIFT_NAME(MTDevice.release(self:));
+void MTDeviceRelease(MTDeviceRef) CF_SWIFT_NAME(MTDevice.release(self:));
 
 CF_ASSUME_NONNULL_END
 

@@ -10,8 +10,13 @@ import PinchCore
 
 struct ContentView: View {
     var body: some View {
-        Button("Test", action: testMultitouch)
-            .padding()
+        HStack {
+            Button("Start", action: MultitouchManager.shared.start)
+            
+            Button("Stop", action: MultitouchManager.shared.stop)
+        }
+        .padding()
+        .fixedSize()
     }
 }
 
