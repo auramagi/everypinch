@@ -21,10 +21,6 @@ public final class MultitouchManager {
     public func start() {
         devices
             .forEach { device in
-                
-                var offset: TimeInterval = 0
-                device.timestampOffset(&offset)
-                print("offset", offset)
                 device.register(contactFrameCallback: frameCallback)
                 device.start(runMode: 0)
             }

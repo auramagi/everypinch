@@ -59,8 +59,6 @@ bool MTDeviceIsAlive(MTDeviceRef) CF_SWIFT_NAME(getter:MTDevice.isAlive(self:));
 bool MTDeviceIsMTHIDDevice(MTDeviceRef) CF_SWIFT_NAME(getter:MTDevice.isMTHIDDevice(self:));
 bool MTDeviceIsRunning(MTDeviceRef) CF_SWIFT_NAME(getter:MTDevice.isRunning(self:));
 
-void MTDeviceGetDeviceTimestampOffset(MTDeviceRef, double*) CF_SWIFT_NAME(MTDevice.timestampOffset(self:_:));
-
 bool MTRegisterContactFrameCallback(MTDeviceRef, MTFrameCallbackFunction) CF_SWIFT_NAME(MTDevice.register(self:contactFrameCallback:));
 bool MTUnregisterContactFrameCallback(MTDeviceRef, MTFrameCallbackFunction callback) CF_SWIFT_NAME(MTDevice.unregister(self:contactFrameCallback:));
 
