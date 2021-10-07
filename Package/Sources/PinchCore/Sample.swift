@@ -4,11 +4,7 @@ import Foundation
 public final class MultitouchManager {
     public static let shared = MultitouchManager()
     
-    private init() {
-        addListener { touches in
-            print("Contact: \(touches.count) touches")
-        }
-    }
+    private init() { }
     
     public typealias Listener = ([MTTouch]) -> Void
     
