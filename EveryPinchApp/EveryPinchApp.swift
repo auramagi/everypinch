@@ -20,11 +20,10 @@ struct PinchApp: App {
             TrackpadView()
                 .frame(minWidth: 100, maxWidth: .infinity, minHeight: 100, maxHeight: .infinity)
                 .environmentObject(container.contentModel)
-                .userActivity("Log", { _ in })
         }.commands {
-            CommandMenu("Custom") {
+            CommandGroup(before: .windowArrangement) {
                 Button("Log") { openURL(URL(string: "EveryPinch://Log")!) }
-                .keyboardShortcut("l", modifiers: .command)
+                    .keyboardShortcut("l", modifiers: .command)
             }
         }
         
@@ -99,34 +98,21 @@ struct TrackpadView: View {
             (p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y)
         )
     }
-    
-    /// Calculate area via [Shoelace formula](https://en.wikipedia.org/wiki/Shoelace_formula)
-    func area(_ points: [CGPoint]) -> CGFloat {
-        var area: CGFloat = 0
-        var j = points.count - 1
-        
-        for i in 0..<points.count {
-            area += (points[j].x + points[i].x) * (points[j].y - points[i].y)
-            j = i  // j is previous vertex to i
-        }
-        
-        return abs(area / 2)
-    }
-}
-
-extension CGPoint: Comparable {
-    public static func < (lhs: CGPoint, rhs: CGPoint) -> Bool {
-        lhs.x == rhs.x ? lhs.y < rhs.y : lhs.x < rhs.x
-    }
 }
 
 struct LogView: View {
     @EnvironmentObject var model: ContentModel
     
     var body: some View {
-        Text(model.text)
+        Text(text)
             .font(.system(.body, design: .monospaced))
             .padding()
+    }
+    
+    var text: String {
+        "[\n"
+            .appending(model.touches.map(\.logEntry).joined(separator: "\n"))
+            .appending("\n]")
     }
 }
 
@@ -141,13 +127,10 @@ final class ContentModel: ObservableObject {
     
     @Published var touches: [MTTouch] = []
     
-    @Published var text: String = ""
-    
     init() {
         manager.addListener { [weak self] touches in
             DispatchQueue.main.async {
                 self?.touches = touches
-                self?.process(touches)
             }
         }
         manager.start()
@@ -157,12 +140,6 @@ final class ContentModel: ObservableObject {
         // TODO: Remove listener
         manager.stop()
     }
-    
-    func process(_ touches: [MTTouch]) {
-        text = "[\n"
-            .appending(touches.map(\.logEntry).joined(separator: "\n"))
-            .appending("\n]")
-    }    
 }
 
 private extension MTPathStage {
